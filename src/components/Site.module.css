@@ -43,3 +43,12 @@
     text-decoration: none;
     color: #61dafb;
 }
+.imgWrapper {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+.imgItem{
+    max-width: 200px;
+    object-fit: contain;
+}
