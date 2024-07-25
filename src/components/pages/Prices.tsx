@@ -37,15 +37,27 @@ export const Prices = (props: Props) => {
         }
     ];
 
+    let [searchParams, setSearchParams] = useSearchParams();
+    console.log(searchParams.get('onSale'));
     const [filteredSneakers, setFilteredSneakers] = useState(sneakers);
 
     function handleOnSale() {
-
+        // setFilteredSneakers(prevState => prevState.filter(sn => sn.onSale))
+        setSearchParams({onSale: 'true'})
     }
 
     function handleReset() {
-
+        // setFilteredSneakers(sneakers)
+        setSearchParams({})
     }
+
+    useEffect(() => {
+        if(searchParams.get('onSale')) {
+            setFilteredSneakers(prevState => prevState.filter(sn => sn.onSale))
+        } else {
+            setFilteredSneakers(sneakers)
+        }
+    }, [searchParams]);
 
 
     return (

@@ -17,6 +17,7 @@ import pumaPicture3 from './assets/puma/krossovki-puma-trinity-mid-hybrid-leathe
 import abibasPicture1 from './assets/abibas/kedy-puma-suede-classic-xxi-374915-01-20-1000x800.jpg'
 import abibasPicture2 from './assets/abibas/krossovki-puma-trinity-mid-hybrid-leather-393985-02-3-1000x800.jpg'
 import abibasPicture3 from './assets/abibas/PostMove_Mid_Cloudfoam_Super_Lifestyle_Basketball_Mid_Classic_Shoes_Black_GY7163_01_standard.webp'
+import {Prices} from "./components/pages/Prices";
 
 export type Item = {
   id: string
@@ -28,6 +29,13 @@ export type Item = {
 
 export type ShopItemsType = {
   [type: string]: Item[];
+}
+
+const PATH = {
+  PAGE_1: '/adidas',
+  PAGE_2: '/puma',
+  PAGE_3: '/abibas',
+  PAGE_4: '/prices',
 }
 
 function App() {
@@ -114,19 +122,29 @@ function App() {
         <div className={styles.nav}>
           <nav>
             <ul style={{listStyleType: "none"}}>
-              <li><NavLink to={'/adidas'} className={({isActive}) => isActive ? styles.activeNavLink : styles.navLink}>Adidas</NavLink></li>
-              <li><NavLink to={'/puma'} className={({isActive}) => isActive ? styles.activeNavLink : styles.navLink}>Puma</NavLink></li>
-              <li><NavLink to={'/abibas'} className={({isActive}) => isActive ? styles.activeNavLink : styles.navLink}>Abibas</NavLink></li>
+              <li><NavLink to={PATH.PAGE_1}
+                           className={({isActive}) => isActive ? styles.activeNavLink : styles.navLink}>Adidas</NavLink>
+              </li>
+              <li><NavLink to={PATH.PAGE_2}
+                           className={({isActive}) => isActive ? styles.activeNavLink : styles.navLink}>Puma</NavLink>
+              </li>
+              <li><NavLink to={PATH.PAGE_3}
+                           className={({isActive}) => isActive ? styles.activeNavLink : styles.navLink}>Abibas</NavLink>
+              </li>
+              <li><NavLink to={PATH.PAGE_4}
+                           className={({isActive}) => isActive ? styles.activeNavLink : styles.navLink}>Prices</NavLink>
+              </li>
             </ul>
           </nav>
         </div>
         <div className={styles.content}>
           <Routes>
-            <Route path={'/'} element={<Navigate to={'/adidas'}/>}></Route>
+            <Route path={'/'} element={<Navigate to={PATH.PAGE_1}/>}></Route>
 
-            <Route path={'/adidas'} element={<Adidas items={shopItems.adidas}/>}></Route>
-            <Route path={'/puma'} element={<Puma items={shopItems.puma}/>}></Route>
-            <Route path={'/abibas'} element={<Abibas items={shopItems.abibas}/>}></Route>
+            <Route path={PATH.PAGE_1} element={<Adidas items={shopItems.adidas}/>}></Route>
+            <Route path={PATH.PAGE_2} element={<Puma items={shopItems.puma}/>}></Route>
+            <Route path={PATH.PAGE_3} element={<Abibas items={shopItems.abibas}/>}></Route>
+            <Route path={PATH.PAGE_4} element={<Prices/>}></Route>
 
             <Route path={'/:type/model/:id'} element={<Model shopItems={shopItems}/>}></Route>
 
