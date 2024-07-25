@@ -1,16 +1,22 @@
 import React from 'react';
 import styles from "./components/Site.module.css";
-import {Routes, Route, NavLink, Navigate, useRouteError} from "react-router-dom";
+import {Routes, Route, NavLink, Navigate} from "react-router-dom";
 import {Adidas} from "./components/pages/Adidas";
 import {Puma} from "./components/pages/Puma";
 import {Abibas} from "./components/pages/Abibas";
 import {Error404} from "./components/pages/Error404";
 import {Model} from "./components/pages/Model";
 import {v1} from "uuid";
-import adidasModel1 from "./assets/AdiFOM_TRXN_Shoes_Black_IG7453_01_standard.webp";
-import adidasModel2 from "./assets/Superstar_XLG_Shoes_Black_IG9777_01_standard.webp";
-import adidasModel3
-  from "./assets/PostMove_Mid_Cloudfoam_Super_Lifestyle_Basketball_Mid_Classic_Shoes_Black_GY7163_01_standard.webp";
+
+import adidasPicture1 from './assets/adidas/AdiFOM_TRXN_Shoes_Black_IG7453_01_standard.webp'
+import adidasPicture2 from './assets/adidas/Superstar_XLG_Shoes_Black_IG9777_01_standard.webp'
+import adidasPicture3 from './assets/adidas/PostMove_Mid_Cloudfoam_Super_Lifestyle_Basketball_Mid_Classic_Shoes_Black_GY7163_01_standard.webp'
+import pumaPicture1 from './assets/puma/kedy-puma-suede-classic-xxi-374915-01-20-1000x800.jpg'
+import pumaPicture2 from './assets/puma/krossovki-puma-trinity-open-road-393361-02-3-1000x800.jpg'
+import pumaPicture3 from './assets/puma/krossovki-puma-trinity-mid-hybrid-leather-393985-02-3-1000x800.jpg'
+import abibasPicture1 from './assets/abibas/kedy-puma-suede-classic-xxi-374915-01-20-1000x800.jpg'
+import abibasPicture2 from './assets/abibas/krossovki-puma-trinity-mid-hybrid-leather-393985-02-3-1000x800.jpg'
+import abibasPicture3 from './assets/abibas/PostMove_Mid_Cloudfoam_Super_Lifestyle_Basketball_Mid_Classic_Shoes_Black_GY7163_01_standard.webp'
 
 export type Item = {
   id: string
@@ -24,13 +30,6 @@ export type ShopItemsType = {
   [type: string]: Item[];
 }
 
-// function ErrorBoundary() {
-//   let error = useRouteError();
-//   console.error(error);
-//   // Uncaught ReferenceError: path is not defined
-//   return <div>Dang!</div>;
-// }
-
 function App() {
 
   const shopItems: ShopItemsType = {
@@ -40,7 +39,7 @@ function App() {
         model: 'ADIDAS ADIFOM TRXN',
         collection: 'new collection1',
         price: '100200$',
-        picture: adidasModel1,
+        picture: adidasPicture1,
 
       },
       {
@@ -48,14 +47,14 @@ function App() {
         model: 'ADIDAS ADIFOM SUPER',
         collection: 'new collection22',
         price: '200300$',
-        picture: adidasModel2
+        picture: adidasPicture2
       },
       {
         id: v1(),
         model: 'ADIDAS SUPER SUPERSKI',
         collection: 'new collection333',
         price: '300400$',
-        picture: adidasModel3
+        picture: adidasPicture3
       }
     ],
     puma: [
@@ -64,7 +63,7 @@ function App() {
         model: 'PUMA ADIFOM TRXN',
         collection: 'new collection1',
         price: '100200$',
-        picture: adidasModel2,
+        picture: pumaPicture1,
 
       },
       {
@@ -72,14 +71,14 @@ function App() {
         model: 'PUMA ADIFOM SUPER',
         collection: 'new collection22',
         price: '200300$',
-        picture: adidasModel3
+        picture: pumaPicture2
       },
       {
         id: v1(),
         model: 'PUMA SUPER SUPERSKI',
         collection: 'new collection333',
         price: '300400$',
-        picture: adidasModel1
+        picture: pumaPicture3
       }
     ],
     abibas: [
@@ -88,7 +87,7 @@ function App() {
         model: 'ABIBAS ADIFOM TRXN',
         collection: 'new collection1',
         price: '100200$',
-        picture: adidasModel3,
+        picture: abibasPicture1,
 
       },
       {
@@ -96,14 +95,14 @@ function App() {
         model: 'ABIBAS ADIFOM SUPER',
         collection: 'new collection22',
         price: '200300$',
-        picture: adidasModel1
+        picture: abibasPicture2
       },
       {
         id: v1(),
         model: 'ABIBAS SUPER SUPERSKI',
         collection: 'new collection333',
         price: '300400$',
-        picture: adidasModel2
+        picture: abibasPicture3
       }
     ]
   }
@@ -130,8 +129,6 @@ function App() {
             <Route path={'/abibas'} element={<Abibas items={shopItems.abibas}/>}></Route>
 
             <Route path={'/:type/model/:id'} element={<Model shopItems={shopItems}/>}></Route>
-
-            {/*<Route path={'/:type/model/:id'} element={<Model shopItems={shopItems}/>} errorElement={<ErrorBoundary />}></Route>*/}
 
             <Route path={'/*'} element={<Error404/>}></Route>
           </Routes>
