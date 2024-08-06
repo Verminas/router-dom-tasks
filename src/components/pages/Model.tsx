@@ -8,9 +8,9 @@ type Props = {
   shopItems: ShopItemsType
 };
 export const Model = ({shopItems}: Props) => {
-  const {type, id} = useParams();
+  const {model, id} = useParams();
   let currentModel;
-  currentModel = type ? shopItems[type].find(m => m.id === id) : null;
+  currentModel = model ? shopItems[model].find(m => m.id === id) : null;
 
   return (
     <div>

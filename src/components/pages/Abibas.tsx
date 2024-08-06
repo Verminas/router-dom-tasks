@@ -15,7 +15,7 @@ export const Abibas = ({items}: Props) => {
               {items.map(a => {
                   return (
                     <div key={a.id}>
-                        <Link to={`/abibas/model/${a.id}`}>
+                        <Link to={`/abibas/${a.id}`}>
                             <img src={a.picture} className={styles.imgItem}/>
                         </Link>
                     </div>

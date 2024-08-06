@@ -18,7 +18,7 @@ export const Adidas = ({items}: Props) => {
         {items.map(a => {
           return (
             <div key={a.id}>
-                <Link to={`/adidas/model/${a.id}`}>
+                <Link to={`/adidas/${a.id}`}>
                     <img src={a.picture} className={styles.imgItem}/>
                 </Link>
             </div>
