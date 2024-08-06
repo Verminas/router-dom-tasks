@@ -38,7 +38,6 @@ export const Prices = (props: Props) => {
     ];
 
     let [searchParams, setSearchParams] = useSearchParams();
-    console.log(searchParams.get('onSale'));
     const [filteredSneakers, setFilteredSneakers] = useState(sneakers);
 
     function handleOnSale() {
