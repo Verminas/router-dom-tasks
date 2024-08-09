@@ -1,11 +1,5 @@
 import * as React from "react";
-import { createRoot } from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
+import {createBrowserRouter, Navigate, RouteObject} from "react-router-dom";
 import App, {ShopItemsType} from "../../App";
 import {Error404} from "../pages/Error404";
 import {Adidas} from "../pages/Adidas";
@@ -25,13 +19,19 @@ import {Puma} from "../pages/Puma";
 import {Abibas} from "../pages/Abibas";
 import {Prices} from "../pages/Prices";
 import {Model} from "../pages/Model";
+import {ProtectedPage} from "../pages/ProtectedPage";
+import {ProtectedRoute} from "../pages/ProtectedRoute";
+import {Login} from "../pages/Login";
 
 export const PATH = {
   ADIDAS: '/adidas',
   PUMA: '/puma',
   ABIBAS: '/abibas',
   PRICES: '/prices',
-  MODEL: '/:model/:id'
+  MODEL: '/:model/:id',
+  PROTECTED_PAGE: '/protected',
+  ERROR: '/error',
+  LOGIN: '/login'
 }
 
 const shopItems: ShopItemsType = {
@@ -109,32 +109,54 @@ const shopItems: ShopItemsType = {
   ]
 }
 
+const publicRoutes: RouteObject[] = [
+  {
+    path: PATH.ADIDAS,
+    element: <Adidas items={shopItems.adidas}/>,
+  },
+  {
+    path: PATH.PUMA,
+    element: <Puma items={shopItems.puma}/>,
+  },
+  {
+    path: PATH.ABIBAS,
+    element: <Abibas items={shopItems.abibas}/>,
+  },
+  {
+    path: PATH.PRICES,
+    element: <Prices/>,
+  },
+  {
+    path: PATH.MODEL,
+    element: <Model shopItems={shopItems}/>,
+  },
+  {
+    path: PATH.ERROR,
+    element: <Error404/>,
+  },
+  {
+    path: PATH.LOGIN,
+    element: <Login/>,
+  },
+]
+const privateRoutes: RouteObject[] = [
+  {
+    path: PATH.PROTECTED_PAGE,
+    element: <ProtectedPage/>
+  },
+]
+
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
-    errorElement: <Error404/>,
+    errorElement: <Navigate to={PATH.ERROR}/>,
     children: [
       {
-        path: PATH.ADIDAS,
-        element: <Adidas items={shopItems.adidas}/>,
+        element: <ProtectedRoute/>,
+        children: [...privateRoutes]
       },
-      {
-        path: PATH.PUMA,
-        element: <Puma items={shopItems.puma}/>,
-      },
-      {
-        path: PATH.ABIBAS,
-        element: <Abibas items={shopItems.abibas}/>,
-      },
-      {
-        path: PATH.PRICES,
-        element: <Prices/>,
-      },
-      {
-        path: PATH.MODEL,
-        element: <Model shopItems={shopItems}/>,
-      },
+      ...publicRoutes
     ]
   },
 ]);

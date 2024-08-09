@@ -52,6 +52,9 @@ function App() {
               <li><NavLink to={PATH.PRICES}
                            className={({isActive}) => isActive ? styles.activeNavLink : styles.navLink}>Prices</NavLink>
               </li>
+              <li><NavLink to={PATH.PROTECTED_PAGE}
+                           className={({isActive}) => isActive ? styles.activeNavLink : styles.navLink}>Protected</NavLink>
+              </li>
             </ul>
           </nav>
         </div>
